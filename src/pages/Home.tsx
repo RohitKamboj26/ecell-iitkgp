@@ -2,9 +2,15 @@ import { ArrowRight, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-bg.jpg";
 import teamPhoto from "@/assets/team-photo.jpg";
 import testimonialSpeaker from "@/assets/testimonial-speaker.jpg";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const initiatives = [
   {
@@ -39,6 +45,116 @@ const initiatives = [
 ];
 
 export default function Home() {
+  const heroRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate background parallax
+      if (bgRef.current) {
+        gsap.to(bgRef.current, {
+          scale: 1.1,
+          scrollTrigger: {
+            trigger: heroRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+      }
+
+      // Animate logo
+      if (logoRef.current) {
+        gsap.fromTo(
+          logoRef.current,
+          {
+            opacity: 0,
+            scale: 0.8,
+            y: -50,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power4.out",
+            delay: 0.2,
+          }
+        );
+      }
+
+      // Animate title
+      if (titleRef.current) {
+        const words = titleRef.current.textContent?.split(" ") || [];
+        titleRef.current.innerHTML = words
+          .map((word, i) => `<span class="hero-word" style="display: inline-block;">${word}</span>`)
+          .join(" ");
+
+        gsap.fromTo(
+          ".hero-word",
+          {
+            opacity: 0,
+            y: 100,
+            rotationX: -90,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            rotationX: 0,
+            duration: 1,
+            stagger: 0.05,
+            ease: "power4.out",
+            delay: 0.5,
+          }
+        );
+      }
+
+      // Animate description
+      if (descriptionRef.current) {
+        gsap.fromTo(
+          descriptionRef.current,
+          {
+            opacity: 0,
+            y: 30,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+            delay: 1.2,
+          }
+        );
+      }
+
+      // Animate button
+      if (buttonRef.current) {
+        gsap.fromTo(
+          buttonRef.current,
+          {
+            opacity: 0,
+            scale: 0.8,
+            y: 20,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            delay: 1.5,
+          }
+        );
+      }
+    }, heroRef);
+
+    return () => ctx.revert();
+  }, []);
+
   const scrollToInitiatives = () => {
     document
       .getElementById("initiatives")
@@ -49,41 +165,397 @@ export default function Home() {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section
-        className="relative h-screen flex items-center justify-center"
+        ref={heroRef}
+        className="relative h-screen flex items-center justify-center overflow-hidden"
+      >
+        {/* Animated Background with Parallax */}
+        <div
+          ref={bgRef}
+          className="absolute inset-0 z-0"
         style={{
-          backgroundImage: `linear-gradient(135deg, rgba(30, 80, 255, 0.85), rgba(0, 0, 0, 0.75)), url(${heroImage})`,
+            backgroundImage: `url(${heroImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-        }}
-      >
-        <div className="container mx-auto px-4 text-center text-background animate-fade-in">
-          <div className="flex flex-col items-center mb-8">
-            <img
-              src="/ecell Logo1.png"
-              alt="E-Cell IIT Kharagpur Logo"
-              className="h-24 md:h-32 w-auto mb-6"
-            />
+            willChange: "transform",
+          }}
+        />
+        
+        {/* Multi-layer Gradient Overlay */}
+        <motion.div
+          className="absolute inset-0 z-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+          style={{
+            background: `
+              radial-gradient(circle at 20% 50%, rgba(30, 80, 255, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.4) 0%, transparent 50%),
+              linear-gradient(135deg, rgba(30, 80, 255, 0.85), rgba(0, 0, 0, 0.75))
+            `,
+          }}
+        />
+        
+        {/* Animated Shimmer Effect */}
+        <motion.div
+          className="absolute inset-0 z-0 opacity-30"
+          animate={{
+            backgroundPosition: ["0% 0%", "100% 100%"],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "linear",
+          }}
+          style={{
+            background: "linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%)",
+            backgroundSize: "200% 200%",
+          }}
+        />
+
+        <div className="container mx-auto px-4 text-center text-background relative z-10">
+          {/* Organization Name - Elegant Subtitle */}
+          <motion.div
+            className="mb-6 md:mb-8"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <motion.p
+              className="text-lg md:text-xl lg:text-2xl font-light text-background/90 tracking-[0.3em] uppercase mb-2"
+              initial={{ opacity: 0, letterSpacing: "0.1em" }}
+              animate={{ opacity: 1, letterSpacing: "0.3em" }}
+              transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
+            >
+              Entrepreneurship Cell
+            </motion.p>
+            <motion.div
+              className="flex items-center justify-center gap-2"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6, duration: 0.6, ease: "back.out(1.7)" }}
+            >
+              <motion.div
+                className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent to-background/50"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.8, duration: 0.8 }}
+              />
+              <motion.p
+                className="text-xl md:text-2xl lg:text-3xl font-bold text-primary-foreground"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9, duration: 0.6 }}
+              >
+                IIT Kharagpur
+              </motion.p>
+              <motion.div
+                className="h-px w-12 md:w-20 bg-gradient-to-l from-transparent to-background/50"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ delay: 0.8, duration: 0.8 }}
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* Main Headline - Split Text Animation */}
+          <div className="mb-8 overflow-hidden">
+            <motion.h1
+              ref={titleRef}
+              className="text-6xl md:text-8xl lg:text-9xl font-black leading-none mb-4"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                    delayChildren: 0.3,
+                  },
+                },
+              }}
+            >
+              {"Where Ideas".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block"
+                  variants={{
+                    hidden: { opacity: 0, y: 100, rotateX: -90 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      rotateX: 0,
+                      transition: {
+                        duration: 0.8,
+                        ease: [0.6, -0.05, 0.01, 0.99],
+                      },
+                    },
+                  }}
+                  style={{
+                    textShadow: "0 0 30px rgba(255,255,255,0.5)",
+                  }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </motion.h1>
+            
+            <motion.h2
+              className="text-5xl md:text-7xl lg:text-8xl font-black leading-none mb-4"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.08,
+                    delayChildren: 0.8,
+                  },
+                },
+              }}
+            >
+              {"Become".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-primary-foreground via-background to-primary-foreground bg-[length:200%_auto]"
+                  variants={{
+                    hidden: { opacity: 0, x: -50, scale: 0.8 },
+                    visible: {
+                      opacity: 1,
+                      x: 0,
+                      scale: 1,
+                      transition: {
+                        duration: 0.6,
+                        ease: "back.out(1.7)",
+                      },
+                    },
+                  }}
+                  style={{
+                    animation: "shimmer 3s linear infinite",
+                  }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </motion.h2>
+            
+            <motion.h3
+              className="text-6xl md:text-8xl lg:text-9xl font-black leading-none"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.1,
+                    delayChildren: 1.3,
+                  },
+                },
+              }}
+            >
+              {"Reality".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block text-primary-foreground"
+                  variants={{
+                    hidden: { opacity: 0, y: 100, rotateX: 90 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      rotateX: 0,
+                      transition: {
+                        duration: 0.8,
+                        ease: [0.6, -0.05, 0.01, 0.99],
+                      },
+                    },
+                  }}
+                  style={{
+                    textShadow: "0 0 40px rgba(255,255,255,0.8), 0 0 80px rgba(30,80,255,0.6)",
+                  }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </motion.h3>
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Entrepreneurship Cell,
-            <br />
-            <span className="text-primary-foreground">IIT Kharagpur</span>
-          </h1>
-          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-background/90">
-            We are on a mission towards building an enterprising India. We
-            provide great opportunities for start-ups, colleges, alumni, and
-            corporates to get involved with us.
-          </p>
+
+          {/* Subheading with Typewriter Effect */}
+          <motion.div
+            ref={descriptionRef}
+            className="mb-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2, duration: 1 }}
+          >
+            <p className="text-2xl md:text-3xl lg:text-4xl font-light text-background/95 mb-4 tracking-wide">
+              Empowering the next generation of
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-3 text-3xl md:text-4xl lg:text-5xl font-bold">
+              {["Innovators", "Entrepreneurs", "Leaders"].map((word, index) => (
+                <motion.span
+                  key={word}
+                  className="relative inline-block px-4 py-2 bg-background/10 backdrop-blur-sm rounded-lg border border-background/20"
+                  initial={{ opacity: 0, scale: 0, rotate: -180 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  transition={{
+                    delay: 2.5 + index * 0.3,
+                    duration: 0.6,
+                    ease: "back.out(1.7)",
+                  }}
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: 5,
+                    backgroundColor: "rgba(255,255,255,0.2)",
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Stats Bar */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-8 md:gap-12 mb-12"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 3.5, duration: 0.8 }}
+          >
+            {[
+              { number: "2L+", label: "Students Reached" },
+              { number: "2K+", label: "Startups Supported" },
+              { number: "250+", label: "Mentors Network" },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                className="text-center"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{
+                  delay: 3.8 + i * 0.2,
+                  duration: 0.5,
+                  ease: "back.out(1.7)",
+                }}
+                whileHover={{ scale: 1.1 }}
+              >
+                <div className="text-4xl md:text-5xl font-black text-primary-foreground mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-sm md:text-base text-background/80 font-medium uppercase tracking-wider">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            ref={buttonRef}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 4.2, duration: 0.8 }}
+          >
+            <motion.div
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative"
+            >
+              <motion.div
+                className="absolute -inset-1 bg-gradient-to-r from-primary via-primary/50 to-primary rounded-lg blur opacity-75"
+                animate={{
+                  opacity: [0.5, 0.8, 0.5],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
           <Button
             size="lg"
             variant="secondary"
             onClick={scrollToInitiatives}
-            className="group"
+                className="group relative overflow-hidden border-2 border-background/20 px-8 py-6 text-lg font-semibold"
           >
-            Our Initiatives
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
+                <span className="relative z-10 flex items-center">
+                  Explore Our World
+                  <motion.span
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </motion.span>
+                </span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-primary/30 via-primary/50 to-primary/30"
+                  initial={{ x: "-100%" }}
+                  whileHover={{ x: "100%" }}
+                  transition={{ duration: 0.6, ease: "easeInOut" }}
+                />
+              </Button>
+            </motion.div>
+          </motion.div>
+
+          {/* Tagline */}
+          <motion.p
+            className="mt-12 text-lg md:text-xl text-background/70 font-light italic max-w-2xl mx-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 4.5, duration: 1 }}
+          >
+            "Building an enterprising India, one startup at a time"
+          </motion.p>
         </div>
+
+        {/* Animated Gradient Orbs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
+            animate={{
+              x: [0, 100, 0],
+              y: [0, -50, 0],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl"
+            animate={{
+              x: [0, -100, 0],
+              y: [0, 50, 0],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </div>
+
+        {/* Grid Pattern Overlay */}
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: "50px 50px",
+          }}
+        />
       </section>
 
       {/* About Us Section */}
@@ -186,13 +658,13 @@ export default function Home() {
                     <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                 ) : (
-                  <Link
-                    to={initiative.path}
-                    className="inline-flex items-center text-primary font-semibold group-hover:gap-2 transition-all"
-                  >
-                    Learn More
-                    <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
+                <Link
+                  to={initiative.path}
+                  className="inline-flex items-center text-primary font-semibold group-hover:gap-2 transition-all"
+                >
+                  Learn More
+                  <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
                 )}
               </Card>
             ))}

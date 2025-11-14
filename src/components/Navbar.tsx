@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { gsap } from "gsap";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,12 +26,51 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLAnchorElement>(null);
+  const navLinksRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Animate navbar on mount
+    if (navRef.current && logoRef.current && navLinksRef.current) {
+      gsap.fromTo(
+        logoRef.current,
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+      );
+      gsap.fromTo(
+        navLinksRef.current.children,
+        { opacity: 0, y: -20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out",
+          delay: 0.2,
+        }
+      );
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const scrolled = window.scrollY > 20;
+      setIsScrolled(scrolled);
+      
+      // Animate navbar on scroll
+      if (navRef.current) {
+        gsap.to(navRef.current, {
+          backgroundColor: scrolled ? "rgba(var(--background), 0.98)" : "rgba(var(--background), 0.95)",
+          backdropFilter: scrolled ? "blur(12px)" : "blur(8px)",
+          boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.1)" : "none",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -38,38 +78,91 @@ export const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-background shadow-md py-3"
-          : "bg-background/95 backdrop-blur-sm py-4"
+      ref={navRef}
+      className={`fixed top-0 left-0 right-0 z-50 ${
+        isScrolled ? "py-3" : "py-4"
       }`}
+      style={{
+        backgroundColor: isScrolled ? "rgba(var(--background), 0.98)" : "rgba(var(--background), 0.95)",
+        backdropFilter: isScrolled ? "blur(12px)" : "blur(8px)",
+      }}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center group">
+          <Link
+            ref={logoRef}
+            to="/"
+            className="flex items-center group"
+            onMouseEnter={(e) => {
+              gsap.to(e.currentTarget, {
+                scale: 1.05,
+                duration: 0.3,
+                ease: "power2.out",
+              });
+            }}
+            onMouseLeave={(e) => {
+              gsap.to(e.currentTarget, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out",
+              });
+            }}
+          >
             <img
               src="/ecell Logo.png"
               alt="E-Cell IIT Kharagpur Logo"
-              className="h-12 w-auto transition-transform group-hover:scale-105"
+              className="h-12 w-auto"
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div ref={navLinksRef} className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`text-sm font-medium relative ${
                 isActive("/") ? "text-primary" : "text-foreground"
               }`}
+              onMouseEnter={(e) => {
+                if (!isActive("/")) {
+                  gsap.to(e.currentTarget, {
+                    color: "hsl(var(--primary))",
+                    duration: 0.2,
+                  });
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive("/")) {
+                  gsap.to(e.currentTarget, {
+                    color: "hsl(var(--foreground))",
+                    duration: 0.2,
+                  });
+                }
+              }}
             >
               Home
             </Link>
             <Link
               to="/about"
-              className={`text-sm font-medium transition-colors hover:text-primary ${
+              className={`text-sm font-medium relative ${
                 isActive("/about") ? "text-primary" : "text-foreground"
               }`}
+              onMouseEnter={(e) => {
+                if (!isActive("/about")) {
+                  gsap.to(e.currentTarget, {
+                    color: "hsl(var(--primary))",
+                    duration: 0.2,
+                  });
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive("/about")) {
+                  gsap.to(e.currentTarget, {
+                    color: "hsl(var(--foreground))",
+                    duration: 0.2,
+                  });
+                }
+              }}
             >
               About
             </Link>
