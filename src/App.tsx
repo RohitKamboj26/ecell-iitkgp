@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { ScrollToTop } from "@/components/ScrollToTop";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Initiative from "./pages/Initiative";
@@ -35,6 +36,7 @@ const App = () => (
               </Routes>
             </main>
             <Footer />
+            <ScrollToTop />
           </div>
         </SmoothScroll>
       </BrowserRouter>

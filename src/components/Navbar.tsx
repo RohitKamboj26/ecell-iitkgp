@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+const ThreeDropdownBg = lazy(() => import("./ThreeDropdownBg"));
 
 const initiatives = [
   { name: "GES", path: "/initiatives/ges" },
@@ -25,6 +26,7 @@ const initiatives = [
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const location = useLocation();
   const navRef = useRef<HTMLElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
@@ -70,8 +72,21 @@ export const Navbar = () => {
       }
     };
     
+    // Use passive listener for better scroll performance
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    // Sync GSAP with Lenis scroll
+    const lenis = (window as any).lenis;
+    if (lenis) {
+      lenis.on("scroll", handleScroll);
+    }
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (lenis) {
+        lenis.off("scroll", handleScroll);
+      }
+    };
   }, []);
 
   const isActive = (path: string) => location.pathname === path;
@@ -168,38 +183,83 @@ export const Navbar = () => {
             </Link>
 
             {/* Initiatives Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center space-x-1 text-sm font-medium text-foreground hover:text-primary transition-colors outline-none">
+            <DropdownMenu open={isDropdownOpen} onOpenChange={setIsDropdownOpen}>
+              <DropdownMenuTrigger className="relative flex items-center space-x-1 text-sm font-medium text-foreground hover:text-primary transition-colors outline-none group">
                 <span>Initiatives</span>
-                <ChevronDown className="w-4 h-4" />
+                <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background border-border shadow-elevated">
-                {initiatives.map((initiative) => {
-                  if (initiative.name === "Empresario") {
-                    return (
-                      <DropdownMenuItem key={initiative.path} asChild>
-                        <a
-                          href="https://empresario.ecell-iitkgp.in"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="cursor-pointer hover:bg-muted transition-colors"
+              <DropdownMenuContent className="relative bg-gradient-to-br from-background/95 via-background/90 to-background/95 backdrop-blur-2xl border border-border/50 shadow-[0_20px_60px_rgba(0,0,0,0.3)] rounded-2xl overflow-hidden p-3 w-64 min-w-[16rem]">
+                {/* Three.js animated background */}
+                {isDropdownOpen && (
+                  <Suspense fallback={null}>
+                    <ThreeDropdownBg className="pointer-events-none absolute inset-0 -z-10 opacity-60" />
+                  </Suspense>
+                )}
+                
+                {/* Header */}
+                <div className="px-3 py-2 mb-2 border-b border-border/30">
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Our Initiatives
+                  </p>
+                </div>
+
+                {/* Menu Items */}
+                <div className="space-y-1">
+                  {initiatives.map((initiative) => {
+                    if (initiative.name === "Empresario") {
+                      return (
+                        <DropdownMenuItem 
+                          key={initiative.path} 
+                          asChild 
+                          className="rounded-lg hover:bg-foreground/5 focus:bg-foreground/5 transition-all duration-200 cursor-pointer"
                         >
-                          {initiative.name}
-                        </a>
+                          <a
+                            href="https://empresario.ecell-iitkgp.in"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-between px-3 py-2.5 rounded-lg group/item"
+                          >
+                            <span className="text-sm font-medium group-hover/item:text-primary transition-colors">
+                              {initiative.name}
+                            </span>
+                            <svg 
+                              className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200" 
+                              fill="none" 
+                              viewBox="0 0 24 24" 
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                        </DropdownMenuItem>
+                      );
+                    }
+                    return (
+                      <DropdownMenuItem 
+                        key={initiative.path} 
+                        asChild 
+                        className="rounded-lg hover:bg-foreground/5 focus:bg-foreground/5 transition-all duration-200 cursor-pointer"
+                      >
+                        <Link
+                          to={initiative.path}
+                          className="flex items-center justify-between px-3 py-2.5 rounded-lg group/item"
+                        >
+                          <span className="text-sm font-medium group-hover/item:text-primary transition-colors">
+                            {initiative.name}
+                          </span>
+                          <svg 
+                            className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </Link>
                       </DropdownMenuItem>
                     );
-                  }
-                  return (
-                    <DropdownMenuItem key={initiative.path} asChild>
-                      <Link
-                        to={initiative.path}
-                        className="cursor-pointer hover:bg-muted transition-colors"
-                      >
-                        {initiative.name}
-                      </Link>
-                    </DropdownMenuItem>
-                  );
-                })}
+                  })}
+                </div>
               </DropdownMenuContent>
             </DropdownMenu>
 

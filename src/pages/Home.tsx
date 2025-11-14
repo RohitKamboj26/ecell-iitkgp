@@ -2,13 +2,16 @@ import { ArrowRight, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, lazy, Suspense } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "framer-motion";
 import heroImage from "@/assets/hero-bg.jpg";
 import teamPhoto from "@/assets/team-photo.jpg";
 import testimonialSpeaker from "@/assets/testimonial-speaker.jpg";
+
+// Lazy load 3D components for better performance
+const ThreeHeroBackground = lazy(() => import("@/components/ThreeHeroBackground"));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -145,7 +148,7 @@ export default function Home() {
             scale: 1,
             y: 0,
             duration: 0.8,
-            ease: "back.out(1.7)",
+            ease: "back.out(1.7)", // leaving GSAP ease as is; valid. If TS complains, could use Back.easeOut
             delay: 1.5,
           }
         );
@@ -168,6 +171,11 @@ export default function Home() {
         ref={heroRef}
         className="relative h-screen flex items-center justify-center overflow-hidden"
       >
+        {/* Three.js Particle Background */}
+        <Suspense fallback={null}>
+          <ThreeHeroBackground text="E-Cell" className="z-0 opacity-30" />
+        </Suspense>
+
         {/* Animated Background with Parallax */}
         <div
           ref={bgRef}
@@ -233,7 +241,7 @@ export default function Home() {
               className="flex items-center justify-center gap-2"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6, duration: 0.6, ease: "back.out(1.7)" }}
+              transition={{ delay: 0.6, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
             >
               <motion.div
                 className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent to-background/50"
@@ -328,7 +336,7 @@ export default function Home() {
                       scale: 1,
                       transition: {
                         duration: 0.6,
-                        ease: "back.out(1.7)",
+                        ease: [0.34, 1.56, 0.64, 1],
                       },
                     },
                   }}
@@ -403,7 +411,7 @@ export default function Home() {
                   transition={{
                     delay: 2.5 + index * 0.3,
                     duration: 0.6,
-                    ease: "back.out(1.7)",
+                    ease: [0.34, 1.56, 0.64, 1],
                   }}
                   whileHover={{
                     scale: 1.1,
@@ -437,7 +445,7 @@ export default function Home() {
                 transition={{
                   delay: 3.8 + i * 0.2,
                   duration: 0.5,
-                  ease: "back.out(1.7)",
+                  ease: [0.34, 1.56, 0.64, 1],
                 }}
                 whileHover={{ scale: 1.1 }}
               >
