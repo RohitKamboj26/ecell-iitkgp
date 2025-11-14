@@ -18,8 +18,6 @@ const initiatives = [
   { name: "SBC", path: "/initiatives/sbc" },
   { name: "KEM", path: "/initiatives/kem" },
   { name: "SSP", path: "/initiatives/ssp" },
-  { name: "StartIn", path: "/initiatives/startin" },
-  { name: "KSC", path: "/initiatives/ksc" },
   { name: "E Adda", path: "/initiatives/e-adda" },
 ];
 
@@ -49,18 +47,12 @@ export const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center font-bold text-xl text-primary-foreground transition-transform group-hover:scale-105">
-              E
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-lg leading-tight text-foreground">
-                Entrepreneurship Cell
-              </span>
-              <span className="text-sm text-primary font-semibold">
-                IIT Kharagpur
-              </span>
-            </div>
+          <Link to="/" className="flex items-center group">
+            <img
+              src="/ecell Logo.png"
+              alt="E-Cell IIT Kharagpur Logo"
+              className="h-12 w-auto transition-transform group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -89,16 +81,32 @@ export const Navbar = () => {
                 <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-background border-border shadow-elevated">
-                {initiatives.map((initiative) => (
-                  <DropdownMenuItem key={initiative.path} asChild>
-                    <Link
-                      to={initiative.path}
-                      className="cursor-pointer hover:bg-muted transition-colors"
-                    >
-                      {initiative.name}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
+                {initiatives.map((initiative) => {
+                  if (initiative.name === "Empresario") {
+                    return (
+                      <DropdownMenuItem key={initiative.path} asChild>
+                        <a
+                          href="https://empresario.ecell-iitkgp.in"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="cursor-pointer hover:bg-muted transition-colors"
+                        >
+                          {initiative.name}
+                        </a>
+                      </DropdownMenuItem>
+                    );
+                  }
+                  return (
+                    <DropdownMenuItem key={initiative.path} asChild>
+                      <Link
+                        to={initiative.path}
+                        className="cursor-pointer hover:bg-muted transition-colors"
+                      >
+                        {initiative.name}
+                      </Link>
+                    </DropdownMenuItem>
+                  );
+                })}
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -118,6 +126,20 @@ export const Navbar = () => {
             >
               Contact Us
             </Link>
+            {/* WhatsApp Link */}
+            <a
+              href="https://wa.me/919876543210"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-10 h-10 rounded-full transition-transform hover:scale-110"
+              aria-label="Contact us on WhatsApp"
+            >
+              <img
+                src="/WhatsApp Image 2025-11-15 at 12.31.27 AM.jpeg"
+                alt="WhatsApp"
+                className="w-10 h-10 rounded-full object-cover"
+              />
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -157,16 +179,32 @@ export const Navbar = () => {
                 <span className="text-xs font-semibold text-muted-foreground uppercase">
                   Initiatives
                 </span>
-                {initiatives.map((initiative) => (
-                  <Link
-                    key={initiative.path}
-                    to={initiative.path}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-sm hover:text-primary transition-colors"
-                  >
-                    {initiative.name}
-                  </Link>
-                ))}
+                {initiatives.map((initiative) => {
+                  if (initiative.name === "Empresario") {
+                    return (
+                      <a
+                        key={initiative.path}
+                        href="https://empresario.ecell-iitkgp.in"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="text-sm hover:text-primary transition-colors"
+                      >
+                        {initiative.name}
+                      </a>
+                    );
+                  }
+                  return (
+                    <Link
+                      key={initiative.path}
+                      to={initiative.path}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-sm hover:text-primary transition-colors"
+                    >
+                      {initiative.name}
+                    </Link>
+                  );
+                })}
               </div>
               <Link
                 to="/rmsoee"
@@ -182,6 +220,21 @@ export const Navbar = () => {
               >
                 Contact Us
               </Link>
+              {/* WhatsApp Link - Mobile */}
+              <a
+                href="https://wa.me/919876543210"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 text-sm font-medium hover:text-primary transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <img
+                  src="/WhatsApp Image 2025-11-15 at 12.31.27 AM.jpeg"
+                  alt="WhatsApp"
+                  className="w-6 h-6 rounded-full object-cover"
+                />
+                <span>WhatsApp Us</span>
+              </a>
             </div>
           </div>
         )}

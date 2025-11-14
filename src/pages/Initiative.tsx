@@ -45,123 +45,93 @@ const initiativesData: Record<
   },
   "ead-lsm": {
     name: "EAD/LSM",
-    tagline: "Entrepreneurial Awareness Drive & Lean Startup Methodology",
+    tagline: "Entrepreneurship Awareness Drive and Local Startup Meet",
     description:
-      "EAD/LSM focuses on spreading entrepreneurial awareness and teaching lean startup principles across colleges in India. Through workshops and seminars, we educate students about entrepreneurship fundamentals and practical business strategies.",
+      "EAD/LSM focuses on spreading entrepreneurial awareness and organizing local startup meetups across colleges in India. Through workshops, seminars, and networking events, we educate students about entrepreneurship fundamentals and connect them with local startup ecosystems.",
     highlights: [
       "Campus outreach programs",
-      "Lean startup workshops",
       "Entrepreneurship awareness sessions",
+      "Local startup meetups and networking",
       "Mentorship connections",
       "Resource sharing and guidance",
     ],
     details:
-      "Our EAD/LSM initiative has reached over 50 colleges, conducting workshops that have benefited thousands of students. We focus on practical learning, helping students understand how to validate ideas, build MVPs, and iterate based on customer feedback.",
+      "Our EAD/LSM initiative has reached over 50 colleges, conducting awareness drives and organizing local startup meetups that have benefited thousands of students. We focus on building connections between students and local startup ecosystems, fostering collaboration and knowledge sharing.",
   },
   cap: {
     name: "CAP",
-    tagline: "Corporate Alumni Partnership",
+    tagline: "Campus Ambassador Program",
     description:
-      "CAP bridges the gap between IIT Kharagpur alumni and the current entrepreneurial ecosystem. We facilitate connections, mentorship, and collaboration opportunities that leverage the expertise and networks of our successful alumni.",
+      "CAP is our Campus Ambassador Program that empowers students across colleges to become ambassadors of entrepreneurship. We train and support campus ambassadors to spread entrepreneurial awareness, organize events, and build vibrant startup ecosystems in their institutions.",
     highlights: [
-      "Alumni mentorship programs",
-      "Industry networking events",
-      "Corporate collaboration opportunities",
-      "Guest lectures and workshops",
-      "Investment connections",
+      "Campus ambassador training",
+      "Event organization support",
+      "Entrepreneurship awareness campaigns",
+      "Resource sharing and guidance",
+      "Network building opportunities",
     ],
     details:
-      "Through CAP, we've connected hundreds of startups with experienced alumni mentors working in leading companies worldwide. The program provides invaluable guidance, industry insights, and networking opportunities that accelerate startup growth.",
+      "Through CAP, we've trained hundreds of campus ambassadors across India, empowering them to organize entrepreneurship events, workshops, and awareness drives in their institutions. The program has created a nationwide network of passionate student leaders driving entrepreneurial culture.",
   },
   mas: {
     name: "MAS",
-    tagline: "Marketing and Sponsorship",
+    tagline: "Million At Stake",
     description:
-      "MAS manages partnerships and sponsorships for all E-Cell initiatives, creating win-win collaborations between corporates and our entrepreneurial ecosystem. We facilitate meaningful engagements that benefit both sponsors and our community.",
+      "MAS (Million At Stake) is a high-stakes entrepreneurship competition that challenges participants to build and pitch innovative business ideas. With significant prize money and investment opportunities at stake, MAS attracts the brightest entrepreneurial minds to compete and showcase their ventures.",
     highlights: [
-      "Corporate partnership management",
-      "Sponsorship acquisition",
-      "Brand collaboration opportunities",
-      "Event sponsorship coordination",
-      "Strategic partnership development",
+      "High-stakes competition format",
+      "Significant prize money and rewards",
+      "Investment opportunities for winners",
+      "Expert jury and evaluation",
+      "Networking with investors and mentors",
     ],
     details:
-      "Our MAS team has successfully partnered with leading national and international brands, securing support for our initiatives while providing sponsors with valuable engagement opportunities with India's brightest entrepreneurial talent.",
+      "Million At Stake has become one of the most prestigious entrepreneurship competitions, attracting top talent from across the country. Winners have received substantial funding, mentorship opportunities, and connections that have accelerated their startup journeys.",
   },
   sbc: {
-    name: "Social Business Challenge",
-    tagline: "Fostering Social Entrepreneurship for Positive Impact",
+    name: "SBC",
+    tagline: "Startup Boot Camp",
     description:
-      "SBC encourages and supports ventures that create positive social impact while being financially sustainable. We believe in business as a force for good and help entrepreneurs build ventures that address social challenges.",
+      "SBC (Startup Boot Camp) is an intensive training program designed to equip aspiring entrepreneurs with the essential skills and knowledge needed to launch successful startups. Through hands-on workshops, mentorship, and practical exercises, participants learn the fundamentals of building and scaling a business.",
     highlights: [
-      "Social impact venture support",
-      "Impact measurement frameworks",
-      "Social entrepreneur mentorship",
-      "Sustainable business model development",
-      "Community engagement programs",
+      "Intensive boot camp training",
+      "Hands-on workshops and exercises",
+      "Expert mentorship sessions",
+      "Business model development",
+      "Pitch practice and feedback",
     ],
     details:
-      "The Social Business Challenge has incubated numerous ventures working on education, healthcare, environment, and rural development. We provide specialized support for social entrepreneurs, helping them balance impact with sustainability.",
+      "Startup Boot Camp has trained hundreds of entrepreneurs, providing them with practical knowledge in areas such as business model development, market validation, fundraising, legal compliance, and growth strategies. Many SBC alumni have gone on to launch successful startups and raise funding.",
   },
   kem: {
     name: "KEM",
-    tagline: "Kharagpur Entrepreneurship Meet",
+    tagline: "Kharagpur Ecosystem Meet-up",
     description:
-      "KEM brings together the local entrepreneurial community in Kharagpur for regular meetups, knowledge sharing, and networking. These gatherings foster collaboration and create a supportive ecosystem for entrepreneurs in the region.",
+      "KEM (Kharagpur Ecosystem Meet-up) brings together entrepreneurs, investors, mentors, and stakeholders from the Kharagpur startup ecosystem for regular meetups, knowledge sharing, and networking. These gatherings foster collaboration and create a supportive environment for ecosystem growth.",
     highlights: [
-      "Regular entrepreneur meetups",
+      "Regular ecosystem meetups",
       "Knowledge sharing sessions",
-      "Local startup showcases",
-      "Networking opportunities",
-      "Community building activities",
+      "Startup showcases and pitches",
+      "Investor and mentor interactions",
+      "Ecosystem building activities",
     ],
     details:
-      "Through KEM, we've built a vibrant local entrepreneurial community that meets regularly to share experiences, solve challenges, and support each other's growth. These informal gatherings have led to numerous collaborations and partnerships.",
+      "Through KEM, we've built a vibrant Kharagpur startup ecosystem that meets regularly to share experiences, solve challenges, and support each other's growth. These meetups bring together all stakeholders - entrepreneurs, investors, mentors, and service providers - creating a thriving ecosystem.",
   },
   ssp: {
     name: "SSP",
-    tagline: "Student Startup Program",
+    tagline: "Startup Service Program",
     description:
-      "SSP provides dedicated support to student entrepreneurs at IIT Kharagpur, offering resources, mentorship, and infrastructure to help them build their ventures while completing their education.",
+      "SSP (Startup Service Program) provides comprehensive services and support to startups, offering resources, mentorship, legal assistance, and infrastructure to help entrepreneurs build and scale their ventures successfully.",
     highlights: [
-      "Co-working space access",
-      "Seed funding opportunities",
-      "Dedicated mentorship",
-      "Legal and compliance support",
-      "Academic flexibility coordination",
+      "Legal and compliance services",
+      "Accounting and financial services",
+      "Business registration support",
+      "Documentation assistance",
+      "Resource access and connections",
     ],
     details:
-      "The Student Startup Program has supported over 100 student ventures, providing them with resources, guidance, and connections needed to succeed. Many SSP alumni have gone on to raise significant funding and build successful companies.",
-  },
-  startin: {
-    name: "StartIn",
-    tagline: "Startup Incubation Program",
-    description:
-      "StartIn is our comprehensive incubation program providing early-stage startups with mentorship, resources, and funding opportunities. We support ventures from ideation through product-market fit and growth.",
-    highlights: [
-      "6-month intensive incubation",
-      "Expert mentorship network",
-      "Funding opportunities",
-      "Market validation support",
-      "Investor connections",
-    ],
-    details:
-      "StartIn has incubated over 50 startups, many of which have raised funding and achieved significant milestones. Our structured program includes weekly mentorship, workshops, peer learning, and culminates in a demo day for investors.",
-  },
-  ksc: {
-    name: "Kharagpur Startup Community",
-    tagline: "Building a Vibrant Startup Ecosystem in Kharagpur",
-    description:
-      "KSC is dedicated to creating a thriving startup ecosystem in Kharagpur through community events, networking opportunities, and collaborative initiatives that bring together entrepreneurs, investors, and enthusiasts.",
-    highlights: [
-      "Community networking events",
-      "Startup workshops and hackathons",
-      "Investor connect sessions",
-      "Knowledge sharing platforms",
-      "Collaborative projects",
-    ],
-    details:
-      "The Kharagpur Startup Community has grown to include hundreds of active members, hosting regular events that facilitate connections, learning, and collaboration. We're building Kharagpur as a recognized startup hub.",
+      "The Startup Service Program has supported numerous startups, providing them with essential services including legal documentation, compliance support, accounting assistance, and access to resources needed to succeed. Many SSP beneficiaries have gone on to raise significant funding and build successful companies.",
   },
   "e-adda": {
     name: "E Adda",
@@ -276,11 +246,25 @@ export default function Initiative() {
             <p className="mb-6 opacity-90">
               Get in touch with us to learn more and get involved.
             </p>
-            <Link to="/contact">
-              <Button variant="secondary" size="lg">
-                Contact Us
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {slug === "empresario" ? (
+                <a
+                  href="https://empresario.ecell-iitkgp.in"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="secondary" size="lg">
+                    Visit Empresario Website
+                  </Button>
+                </a>
+              ) : (
+                <Link to="/contact">
+                  <Button variant="secondary" size="lg">
+                    Contact Us
+                  </Button>
+                </Link>
+              )}
+            </div>
           </Card>
         </div>
       </section>

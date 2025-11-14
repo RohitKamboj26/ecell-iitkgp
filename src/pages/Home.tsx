@@ -18,29 +18,16 @@ const initiatives = [
     title: "Empresario",
     short: "Empresario",
     description:
-      "The annual entrepreneurship fest of IIT Kharagpur with competitions, workshops, and networking opportunities.",
-    path: "/initiatives/empresario",
+      "Global business model competition with prizes worth ₹1 Cr and mentorship from 75+ leading VC partners.",
+    path: "https://empresario.ecell-iitkgp.in",
+    external: true,
   },
   {
-    title: "StartIn",
-    short: "StartIn",
-    description:
-      "A startup incubation program providing mentorship, resources, and funding opportunities to early-stage ventures.",
-    path: "/initiatives/startin",
-  },
-  {
-    title: "Social Business Challenge",
+    title: "Startup Boot Camp",
     short: "SBC",
     description:
-      "Fostering social entrepreneurship by supporting ventures that create positive social impact.",
+      "An intensive training program designed to equip aspiring entrepreneurs with essential skills to launch successful startups.",
     path: "/initiatives/sbc",
-  },
-  {
-    title: "Kharagpur Startup Community",
-    short: "KSC",
-    description:
-      "Building a vibrant startup ecosystem in Kharagpur through community events and networking.",
-    path: "/initiatives/ksc",
   },
   {
     title: "E Adda",
@@ -70,6 +57,13 @@ export default function Home() {
         }}
       >
         <div className="container mx-auto px-4 text-center text-background animate-fade-in">
+          <div className="flex flex-col items-center mb-8">
+            <img
+              src="/ecell Logo1.png"
+              alt="E-Cell IIT Kharagpur Logo"
+              className="h-24 md:h-32 w-auto mb-6"
+            />
+          </div>
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             Entrepreneurship Cell,
             <br />
@@ -181,13 +175,25 @@ export default function Home() {
                 <p className="text-muted-foreground mb-4">
                   {initiative.description}
                 </p>
-                <Link
-                  to={initiative.path}
-                  className="inline-flex items-center text-primary font-semibold group-hover:gap-2 transition-all"
-                >
-                  Learn More
-                  <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                {initiative.external ? (
+                  <a
+                    href={initiative.path}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center text-primary font-semibold group-hover:gap-2 transition-all"
+                  >
+                    Visit Website
+                    <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                ) : (
+                  <Link
+                    to={initiative.path}
+                    className="inline-flex items-center text-primary font-semibold group-hover:gap-2 transition-all"
+                  >
+                    Learn More
+                    <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                )}
               </Card>
             ))}
           </div>
