@@ -21,6 +21,7 @@ const initiatives = [
   { name: "KEM", path: "/initiatives/kem" },
   { name: "SSP", path: "/initiatives/ssp" },
   { name: "E Adda", path: "/initiatives/e-adda" },
+  { name: "KGPForge", path: "https://kgpforge.ecell-iitkgp.in/" },
 ];
 
 export const Navbar = () => {
@@ -234,6 +235,34 @@ export const Navbar = () => {
                         </DropdownMenuItem>
                       );
                     }
+                    if (initiative.name === "KGPForge") {
+                      return (
+                        <DropdownMenuItem 
+                          key={initiative.path} 
+                          asChild 
+                          className="rounded-lg hover:bg-foreground/5 focus:bg-foreground/5 transition-all duration-200 cursor-pointer"
+                        >
+                          <a
+                            href="https://kgpforge.ecell-iitkgp.in/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-between px-3 py-2.5 rounded-lg group/item"
+                          >
+                            <span className="text-sm font-medium group-hover/item:text-primary transition-colors">
+                              {initiative.name}
+                            </span>
+                            <svg 
+                              className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all duration-200" 
+                              fill="none" 
+                              viewBox="0 0 24 24" 
+                              stroke="currentColor"
+                            >
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </a>
+                        </DropdownMenuItem>
+                      );
+                    }
                     return (
                       <DropdownMenuItem 
                         key={initiative.path} 
@@ -338,6 +367,20 @@ export const Navbar = () => {
                       <a
                         key={initiative.path}
                         href="https://empresario.ecell-iitkgp.in"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="text-sm hover:text-primary transition-colors"
+                      >
+                        {initiative.name}
+                      </a>
+                    );
+                  }
+                  if (initiative.name === "KGPForge") {
+                    return (
+                      <a
+                        key={initiative.path}
+                        href="https://kgpforge.ecell-iitkgp.in/"
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => setIsMobileMenuOpen(false)}

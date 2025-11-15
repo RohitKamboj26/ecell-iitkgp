@@ -32,6 +32,13 @@ const initiatives = [
     external: true,
   },
   {
+    title: "KGPForge",
+    short: "KGPForge",
+    description: "Explore KGPForge.",
+    path: "https://kgpforge.ecell-iitkgp.in/",
+    external: true,
+  },
+  {
     title: "Startup Boot Camp",
     short: "SBC",
     description:
