@@ -2,21 +2,29 @@
 
 	"use strict";
 
-	var spinner = function () {
-		setTimeout(function () {
-			if ($('#unslate_co--overlayer').length > 0) {
-				$('#unslate_co--overlayer').fadeOut('slow', function () {
-					$(this).remove();
-				});
-			}
-			if ($('.site-loader-wrap').length > 0) {
-				$('.site-loader-wrap').fadeOut('slow', function () {
-					$(this).remove();
-				});
-			}
-		}, 1000);
+	var hideLoader = function () {
+		var overlay = $('#unslate_co--overlayer');
+		var loader = $('.site-loader-wrap');
+
+		if (overlay.length) {
+			overlay.fadeOut('slow', function () {
+				$(this).remove();
+			});
+		}
+
+		if (loader.length) {
+			loader.fadeOut('slow', function () {
+				$(this).remove();
+			});
+		}
 	};
-	spinner();
+
+	// Clear loader on window load and also via a fallback timer so it never sticks.
+	$(window).on('load', function () {
+		setTimeout(hideLoader, 500);
+	});
+
+	setTimeout(hideLoader, 3000);
 
 
 	var initAOS = function () {
