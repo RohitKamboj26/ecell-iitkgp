@@ -1,3 +1,34 @@
+
+// Minimal fallback so the loader clears even if jQuery/CDNs fail to load.
+(function () {
+	"use strict";
+
+	var hideLoaderVanilla = function () {
+		var overlay = document.getElementById('unslate_co--overlayer');
+		var loader = document.querySelector('.site-loader-wrap');
+
+		if (overlay) {
+			overlay.style.transition = 'opacity 0.6s ease';
+			overlay.style.opacity = '0';
+			setTimeout(function () { overlay.remove(); }, 650);
+		}
+
+		if (loader) {
+			loader.style.transition = 'opacity 0.6s ease';
+			loader.style.opacity = '0';
+			setTimeout(function () { loader.remove(); }, 650);
+		}
+	};
+
+	if (typeof window.jQuery === 'undefined') {
+		window.addEventListener('load', function () {
+			setTimeout(hideLoaderVanilla, 300);
+		});
+		setTimeout(hideLoaderVanilla, 3000);
+		return; // Skip the jQuery-dependent code below.
+	}
+})();
+
 (function ($) {
 
 	"use strict";
