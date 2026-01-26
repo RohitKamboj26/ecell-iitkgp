@@ -1,5 +1,5 @@
 import { useEffect, createContext, useContext } from "react";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 
 // Create context to allow components to access Lenis instance
 const LenisContext = createContext<Lenis | null>(null);
