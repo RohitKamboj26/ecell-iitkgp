@@ -57,3 +57,5 @@ out/
 # Dependencies lock files (optional, uncomment if needed)
 # package-lock.json
 # yarn.lock
+.vercel
+.env*.local
