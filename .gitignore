@@ -1,3 +1,11 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
 # Logs
 logs
 *.log
@@ -22,3 +30,30 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Credentials and secrets
+*.pem
+*.key
+*.crt
+.auth
+credentials.json
+
+# Build outputs
+build/
+.next/
+out/
+
+# Dependencies lock files (optional, uncomment if needed)
+# package-lock.json
+# yarn.lock
