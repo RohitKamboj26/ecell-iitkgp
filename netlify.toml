@@ -1,4 +1,24 @@
 [[redirects]]
+  from = "/ges-archive.html"
+  to = "/ges-archive.html"
+  status = 200
+
+[[redirects]]
+  from = "/data/*"
+  to = "/data/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/certificate.png"
+  to = "/certificate.png"
+  status = 200
+
+[[redirects]]
+  from = "/certificate.svg"
+  to = "/certificate.svg"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

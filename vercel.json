@@ -1,6 +1,22 @@
 {
   "rewrites": [
     {
+      "source": "/ges-archive.html",
+      "destination": "/ges-archive.html"
+    },
+    {
+      "source": "/data/:path*",
+      "destination": "/data/:path*"
+    },
+    {
+      "source": "/certificate.png",
+      "destination": "/certificate.png"
+    },
+    {
+      "source": "/certificate.svg",
+      "destination": "/certificate.svg"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
