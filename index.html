@@ -10,6 +10,10 @@
   <meta name="keywords" content="html, css, javascript, jquery">
   <meta name="author" content="">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
   <!-- Local IcoMoon likely broken, consider FontAwesome or re-uploading IcoMoon fonts if icons are missing -->
   <!-- <link rel="stylesheet" href="css/vendor/icomoon/style.css"> -->
 
@@ -214,6 +218,7 @@
               <ul class="site-nav-ul js-clone-nav text-left d-none d-lg-inline-block">
                 <li><a href="#testimonial-section" class="nav-link">RMSOEE</a></li>
                 <li><a href="#journal-section" class="nav-link">Gallery</a></li>
+                <li><a href="ges-archive.html" class="nav-link" target="_blank" rel="noopener noreferrer">GES Archive</a></li>
                 <li><a href="#contact-section" class="nav-link">Contact</a></li>
               </ul>
 
@@ -1194,6 +1199,89 @@
 
         </div>
       </div>
+
+      <style>
+        .ges-archive-card {
+          background: rgba(18, 18, 18, 0.9);
+          border: 1px solid rgba(123, 44, 191, 0.35);
+          border-radius: 14px;
+          padding: 1.5rem;
+          box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+        }
+
+        .ges-archive-note {
+          color: #ffffff;
+          margin-bottom: 1rem;
+          font-family: "Montserrat", Arial, sans-serif;
+          font-size: 19px;
+        }
+
+        .ges-status {
+          min-height: 1.5rem;
+          margin-top: 0.85rem;
+          font-weight: 600;
+          font-family: "Montserrat", Arial, sans-serif;
+          font-size: 19px;
+          color: #ffffff;
+        }
+
+        .ges-status.error {
+          color: #ff9b9b;
+        }
+
+        .ges-status.success {
+          color: #7effc5;
+        }
+
+        .ges-preview-card {
+          margin-top: 1.5rem;
+          background: rgba(255, 255, 255, 0.04);
+          border-radius: 12px;
+          padding: 1rem;
+        }
+
+        .ges-preview-card.hidden {
+          display: none;
+        }
+
+        .ges-preview-canvas {
+          width: 100%;
+          max-width: 100%;
+          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: #fff;
+        }
+
+        .ges-archive-card label,
+        .ges-archive-card .form-control,
+        .ges-archive-card .btn,
+        .ges-archive-card .ges-archive-note,
+        .ges-archive-card .ges-status {
+          color: #ffffff;
+          font-family: "Montserrat", Arial, sans-serif;
+          font-size: 19px;
+        }
+
+        .ges-archive-card .form-control {
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .ges-archive-card .form-control::placeholder {
+          color: rgba(255, 255, 255, 0.78);
+          opacity: 1;
+        }
+
+        .ges-archive-card .form-control:focus::placeholder {
+          color: transparent;
+        }
+
+        #ges-college-list option {
+          font-family: "Montserrat", Arial, sans-serif;
+          font-size: 19px;
+        }
+      </style>
+
       <div class="unslate_co--section" id="contact-section">
         <div class="container">
           <div class="section-heading-wrap text-center mb-5">

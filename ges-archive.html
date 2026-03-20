@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>GES Archive | E-Cell IIT Kharagpur</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    :root {
+      --ges-accent: #eb5002;
+      --ges-accent-soft: #eb500233;
+      --ges-bg-1: #1b0f08;
+      --ges-bg-2: #120a06;
+      --ges-bg-3: #080503;
+      --ges-text-muted: #f0d8ca;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 20% 10%, #eb500226 0%, transparent 45%),
+        radial-gradient(circle at 80% 100%, #eb50021a 0%, transparent 40%),
+        linear-gradient(140deg, var(--ges-bg-1) 0%, var(--ges-bg-2) 45%, var(--ges-bg-3) 100%);
+      min-height: 100vh;
+      color: #ffffff;
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .archive-wrap {
+      padding: 4rem 0 5rem;
+    }
+
+    .ges-archive-card {
+      margin: 0 auto;
+      max-width: 980px;
+      padding: 2rem;
+      border-radius: 20px;
+      background: rgba(20, 12, 8, 0.78);
+      border: 1px solid #eb50024d;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(8px);
+    }
+
+    .ges-archive-note {
+      color: var(--ges-text-muted);
+      margin-bottom: 1.2rem;
+      font-size: 0.98rem;
+    }
+
+    .ges-status {
+      margin-top: 1rem;
+      min-height: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .ges-status.error {
+      color: #ffb7b7;
+    }
+
+    .ges-status.success {
+      color: #b6ffd4;
+    }
+
+    .ges-preview-card {
+      margin-top: 1.4rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #eb50024d;
+      background: rgba(11, 8, 6, 0.8);
+    }
+
+    .ges-preview-card.hidden {
+      display: none;
+    }
+
+    .ges-preview-canvas {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .ges-archive-card label,
+    .ges-archive-card .form-control,
+    .ges-archive-card .btn,
+    .ges-archive-card .ges-archive-note,
+    .ges-archive-card .ges-status {
+      font-family: "Montserrat", Arial, sans-serif;
+    }
+
+    .ges-archive-card .form-control {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid #eb500233;
+      color: #fff;
+      height: 52px;
+    }
+
+    .ges-archive-card .form-control:focus {
+      border-color: var(--ges-accent);
+      box-shadow: 0 0 0 0.2rem #eb500233;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .ges-archive-card .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.65);
+      opacity: 1;
+    }
+
+    .ges-archive-card .form-control:focus::placeholder {
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    #ges-college-list option {
+      font-family: "Montserrat", Arial, sans-serif;
+      font-size: 19px;
+    }
+
+    .btn-custom-light {
+      border-color: var(--ges-accent);
+      color: #fff;
+      background: #eb50021a;
+    }
+
+    .btn-custom-light:hover,
+    .btn-custom-light:focus {
+      border-color: var(--ges-accent);
+      background: var(--ges-accent);
+      color: #fff;
+      box-shadow: 0 10px 30px #eb50024d;
+    }
+
+    #ges-download-btn.disabled {
+      opacity: 0.6;
+      border-color: #ffffff4d;
+    }
+  </style>
+</head>
+<body>
+  <main class="archive-wrap">
+    <div class="container">
+      <div class="section-heading-wrap text-center mb-5">
+        <h2 class="heading-h2 text-center divider responsive-heading">
+          <span class="gsap-reveal">GES Archive<span style="color: #eb5002; text-shadow: 0 0 10px #eb5002, 0 0 20px #eb5002;">.</span></span>
+        </h2>
+        <p class="text-white-50 mt-2 mb-0">Certificate Generator</p>
+      </div>
+
+      <div class="ges-archive-card">
+        <p class="ges-archive-note">
+          Enter your name and choose your college to download your certificate.
+        </p>
+
+        <form id="ges-certificate-form" class="form-outline-style-v1" novalidate>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input id="ges-name" name="ges-name" type="text" class="form-control" placeholder="Participant Name" aria-label="Participant Name">
+            </div>
+            <div class="form-group col-md-6">
+              <input id="ges-college" name="ges-college" type="text" class="form-control" list="ges-college-list" placeholder="College Name" aria-label="College Name">
+            </div>
+          </div>
+          <datalist id="ges-college-list"></datalist>
+
+          <div class="d-flex flex-wrap align-items-center" style="gap: 0.6rem;">
+            <button type="submit" class="btn btn-outline-pill btn-custom-light">Find Certificate</button>
+            <a id="ges-download-btn" class="btn btn-outline-pill btn-custom-light disabled" href="#" download="ges-certificate.png" aria-disabled="true">Download Certificate</a>
+          </div>
+        </form>
+
+        <div id="ges-status" class="ges-status" aria-live="polite"></div>
+
+        <div id="ges-preview-card" class="ges-preview-card hidden">
+          <canvas id="ges-certificate-canvas" class="ges-preview-canvas" width="1600" height="1131"></canvas>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const GES_CSV_URL = 'data/ges-participants.csv';
+      const GES_CERTIFICATE_TEMPLATE_URLS = [
+        'certificate.png',
+        'certificate.svg',
+        'images/ges-certificate-template.png',
+        'images/ges-certificate-template.svg'
+      ];
+
+      function normalizeValue(value) {
+        return (value || '').replace(/\s+/g, ' ').trim().toLowerCase();
+      }
+
+      function csvToRows(csvText) {
+        const lines = csvText.replace(/^\uFEFF/, '').split(/\r?\n/).filter(Boolean);
+        if (lines.length < 2) return [];
+
+        function parseCsvLine(line) {
+          const values = [];
+          let current = '';
+          let inQuotes = false;
+
+          for (let i = 0; i < line.length; i++) {
+            const char = line[i];
+            const next = line[i + 1];
+
+            if (char === '"') {
+              if (inQuotes && next === '"') {
+                current += '"';
+                i += 1;
+              } else {
+                inQuotes = !inQuotes;
+              }
+            } else if (char === ',' && !inQuotes) {
+              values.push(current.trim());
+              current = '';
+            } else {
+              current += char;
+            }
+          }
+
+          values.push(current.trim());
+          return values;
+        }
+
+        const headers = parseCsvLine(lines[0]).map(h => h.trim());
+
+        return lines.slice(1).map(line => {
+          const cells = parseCsvLine(line);
+          const row = {};
+          headers.forEach((header, index) => {
+            row[header] = (cells[index] || '').trim();
+          });
+          return row;
+        }).filter(row => row.Name && row['College Name']);
+      }
+
+      function slugify(value) {
+        return (value || 'participant').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      }
+
+      function fitText(ctx, text, maxWidth, startSize, weight) {
+        let size = startSize;
+        while (size >= 26) {
+          ctx.font = `${weight} ${size}px "Montserrat", Arial, sans-serif`;
+          if (ctx.measureText(text).width <= maxWidth) return size;
+          size -= 2;
+        }
+        return 26;
+      }
+
+      async function loadSingleTemplate(url) {
+        return new Promise((resolve, reject) => {
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          img.onload = () => resolve({ img, sourceUrl: url });
+          img.onerror = () => reject(new Error(`Failed to load ${url}`));
+          img.src = url;
+        });
+      }
+
+      async function loadCertificateTemplate() {
+        for (const templateUrl of GES_CERTIFICATE_TEMPLATE_URLS) {
+          try {
+            return await loadSingleTemplate(templateUrl);
+          } catch (error) {
+            // Try next candidate template path.
+          }
+        }
+        throw new Error('Certificate template not found. Add certificate.png or certificate.svg at project root.');
+      }
+
+      document.addEventListener('DOMContentLoaded', async () => {
+        const form = document.getElementById('ges-certificate-form');
+        const nameInput = document.getElementById('ges-name');
+        const collegeInput = document.getElementById('ges-college');
+        const collegeList = document.getElementById('ges-college-list');
+        const status = document.getElementById('ges-status');
+        const previewCard = document.getElementById('ges-preview-card');
+        const canvas = document.getElementById('ges-certificate-canvas');
+        const downloadBtn = document.getElementById('ges-download-btn');
+
+        if (!form || !canvas) return;
+
+        let participants = [];
+        let templateImage = null;
+
+        async function ensureCertificateFontLoaded() {
+          if (!document.fonts || !document.fonts.load) return;
+          try {
+            await Promise.all([
+              document.fonts.load('700 64px Montserrat'),
+              document.fonts.load('600 44px Montserrat')
+            ]);
+          } catch (error) {
+            // If font loading fails, canvas will use fallback fonts.
+          }
+        }
+
+        function setStatus(message, type) {
+          status.textContent = message;
+          status.classList.remove('error', 'success');
+          if (type) status.classList.add(type);
+        }
+
+        function setDownloadState(enabled, href, fileName) {
+          if (enabled) {
+            downloadBtn.classList.remove('disabled');
+            downloadBtn.setAttribute('aria-disabled', 'false');
+            downloadBtn.href = href;
+            downloadBtn.download = fileName;
+          } else {
+            downloadBtn.classList.add('disabled');
+            downloadBtn.setAttribute('aria-disabled', 'true');
+            downloadBtn.href = '#';
+            downloadBtn.download = 'ges-certificate.png';
+          }
+        }
+
+        function populateCollegeOptions(rows) {
+          if (!collegeList) return;
+          const uniqueColleges = Array.from(new Set(
+            rows.map(row => (row['College Name'] || '').trim()).filter(Boolean)
+          )).sort((a, b) => a.localeCompare(b));
+
+          collegeList.innerHTML = uniqueColleges.map(college => `<option value="${college.replace(/"/g, '&quot;')}"></option>`).join('');
+        }
+
+        function findParticipant(name, college) {
+          const normalizedName = normalizeValue(name);
+          const normalizedCollege = normalizeValue(college);
+
+          return participants.find(row => {
+            const rowName = normalizeValue(row.Name);
+            const rowCollege = normalizeValue(row['College Name']);
+
+            const nameOk = normalizedName ? rowName === normalizedName : true;
+            const collegeOk = normalizedCollege ? rowCollege === normalizedCollege : true;
+
+            return normalizedName && normalizedCollege && nameOk && collegeOk;
+          });
+        }
+
+        function renderCertificate(record) {
+          const ctx = canvas.getContext('2d');
+          if (!ctx || !templateImage) return;
+
+          canvas.width = templateImage.naturalWidth;
+          canvas.height = templateImage.naturalHeight;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(templateImage, 0, 0, canvas.width, canvas.height);
+
+          const centerX = canvas.width / 2;
+          const maxTextWidth = canvas.width * 0.72;
+          const nameY = Math.round(canvas.height * 0.53);
+          const collegeY = Math.round(canvas.height * 0.61);
+
+          const nameSize = fitText(ctx, record.Name, maxTextWidth, Math.round(canvas.width * 0.043), '700');
+          ctx.fillStyle = '#ffffff';
+          ctx.shadowColor = 'rgba(0, 0, 0, 0.45)';
+          ctx.shadowBlur = 6;
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 2;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.font = `700 ${nameSize}px "Montserrat", sans-serif`;
+          ctx.fillText(record.Name, centerX, nameY);
+
+          const collegeLabel = record['College Name'];
+          const collegeSize = fitText(ctx, collegeLabel, maxTextWidth, Math.round(canvas.width * 0.025), '600');
+          ctx.fillStyle = '#ffffff';
+          ctx.font = `600 ${collegeSize}px "Montserrat", sans-serif`;
+          ctx.fillText(collegeLabel, centerX, collegeY);
+          ctx.shadowColor = 'transparent';
+          ctx.shadowBlur = 0;
+
+          const dataUrl = canvas.toDataURL('image/png');
+          const fileName = `ges-certificate-${slugify(record.Name)}.png`;
+          setDownloadState(true, dataUrl, fileName);
+          previewCard.classList.remove('hidden');
+        }
+
+        try {
+          const [csvResponse, loadedTemplate] = await Promise.all([
+            fetch(GES_CSV_URL, { cache: 'no-store' }),
+            loadCertificateTemplate()
+          ]);
+
+          if (!csvResponse.ok) throw new Error('Unable to load participant CSV.');
+          const csvText = await csvResponse.text();
+          participants = csvToRows(csvText);
+          populateCollegeOptions(participants);
+          templateImage = loadedTemplate.img;
+          await ensureCertificateFontLoaded();
+        } catch (error) {
+          setStatus(error.message + ' Please check file paths and reload.', 'error');
+        }
+
+        form.addEventListener('submit', event => {
+          event.preventDefault();
+          setDownloadState(false);
+
+          const participant = findParticipant(nameInput.value, collegeInput.value);
+          if (!participant) {
+            previewCard.classList.add('hidden');
+            setStatus('No matching participant found. Check spelling of name and college.', 'error');
+            return;
+          }
+
+          renderCertificate(participant);
+          setStatus(`Certificate ready for ${participant.Name}.`, 'success');
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        const linkedName = params.get('name') || '';
+        const linkedCollege = params.get('college') || '';
+        if (linkedName || linkedCollege) {
+          nameInput.value = linkedName;
+          collegeInput.value = linkedCollege;
+          form.dispatchEvent(new Event('submit', { cancelable: true }));
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
