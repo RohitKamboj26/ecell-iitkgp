@@ -9,8 +9,8 @@
       "destination": "/data/:path*"
     },
     {
-      "source": "/certificate.png",
-      "destination": "/certificate.png"
+      "source": "/certificate.jpeg",
+      "destination": "/certificate.jpeg"
     },
     {
       "source": "/certificate.svg",

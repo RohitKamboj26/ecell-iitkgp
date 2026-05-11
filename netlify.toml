@@ -9,8 +9,8 @@
   status = 200
 
 [[redirects]]
-  from = "/certificate.png"
-  to = "/certificate.png"
+  from = "/certificate.jpeg"
+  to = "/certificate.jpeg"
   status = 200
 
 [[redirects]]
