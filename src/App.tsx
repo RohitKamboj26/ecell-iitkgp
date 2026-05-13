@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Initiative from "./pages/Initiative";
 import RMSOEE from "./pages/RMSOEE";
 import Contact from "./pages/Contact";
+import Certificate from "./pages/Certificate";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
                 <Route path="/initiatives/:slug" element={<Initiative />} />
                 <Route path="/rmsoee" element={<RMSOEE />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/certificate" element={<Certificate />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
