@@ -74,8 +74,8 @@
 				w = $this.width();
 
 			if (w > 768) {
-				if ($('body').hasClass('offcanvas-menu')) {
-					$('body').removeClass('offcanvas-menu');
+				if ($('body').hasClass('offcanvas')) {
+					$('body').removeClass('offcanvas');
 				}
 			}
 		})
@@ -84,11 +84,11 @@
 			var $this = $(this);
 			e.preventDefault();
 
-			if ($('body').hasClass('offcanvas-menu')) {
-				$('body').removeClass('offcanvas-menu');
+			if ($('body').hasClass('offcanvas')) {
+				$('body').removeClass('offcanvas');
 				$this.removeClass('active');
 			} else {
-				$('body').addClass('offcanvas-menu');
+				$('body').addClass('offcanvas');
 				$this.addClass('active');
 			}
 		})
@@ -97,8 +97,8 @@
 		$(document).mouseup(function (e) {
 			var container = $(".site-mobile-inner");
 			if (!container.is(e.target) && container.has(e.target).length === 0) {
-				if ($('body').hasClass('offcanvas-menu')) {
-					$('body').removeClass('offcanvas-menu');
+				if ($('body').hasClass('offcanvas')) {
+					$('body').removeClass('offcanvas');
 				}
 			}
 		});
@@ -115,8 +115,8 @@
 			}, 1000);
 
 			// Close mobile menu if open
-			if ($('body').hasClass('offcanvas-menu')) {
-				$('body').removeClass('offcanvas-menu');
+			if ($('body').hasClass('offcanvas')) {
+				$('body').removeClass('offcanvas');
 				$('.js-menu-toggle').removeClass('active');
 			}
 		}

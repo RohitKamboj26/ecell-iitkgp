@@ -78,9 +78,10 @@ a:hover {
   width: 100%;
   background-color: #191919;
   color: #fff;
-  z-index: 1; 
+  z-index: 1;
   height: auto;
-  padding-bottom: 50px; /* Add some padding since height is auto */
+  padding-bottom: 50px;
+  /* Add some padding since height is auto */
 }
 
 @media (max-width: 991.98px) {
@@ -630,12 +631,11 @@ a:hover {
   position: fixed;
   z-index: 1009;
   height: 100vh;
-  background: #fff;
-  width: 280px;
+  background: #000;
+  width: 100%;
   overflow: auto;
   padding-top: 30px;
   padding-bottom: 70px;
-  width: 280px;
   left: 0;
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
@@ -668,7 +668,7 @@ a:hover {
 
 .unslate_co--site-mobile-menu .close-wrap a .close-label {
   margin-right: 20px;
-  color: #000;
+  color: #fff;
 }
 
 .unslate_co--site-mobile-menu .close-wrap a .close-times {
@@ -681,7 +681,7 @@ a:hover {
 .unslate_co--site-mobile-menu .close-wrap a .close-times .bar2 {
   width: 2px;
   height: 20px;
-  background: #000;
+  background: #fff;
   position: absolute;
 }
 
@@ -712,7 +712,7 @@ a:hover {
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  color: #000;
+  color: #fff;
 }
 
 .unslate_co--site-mobile-menu ul a:hover,
@@ -756,7 +756,7 @@ a:hover {
   position: absolute;
   top: 50%;
   left: 50%;
-  color: #000;
+  color: #fff;
   -webkit-transform: translate(-50%, -50%) rotate(-180deg);
   -ms-transform: translate(-50%, -50%) rotate(-180deg);
   transform: translate(-50%, -50%) rotate(-180deg);
