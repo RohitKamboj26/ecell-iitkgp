@@ -4,6 +4,11 @@
   status = 200
 
 [[redirects]]
+  from = "/email-policy"
+  to = "/email-policy.html"
+  status = 200
+
+[[redirects]]
   from = "/data/*"
   to = "/data/:splat"
   status = 200

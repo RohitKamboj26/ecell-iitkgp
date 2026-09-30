@@ -5,6 +5,10 @@
       "destination": "/ges-archive.html"
     },
     {
+      "source": "/email-policy",
+      "destination": "/email-policy.html"
+    },
+    {
       "source": "/data/:path*",
       "destination": "/data/:path*"
     },
