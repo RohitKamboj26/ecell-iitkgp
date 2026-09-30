@@ -19,6 +19,12 @@ export default defineConfig(({ mode }) => ({
         drop_console: true,
       },
     },
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        emailPolicy: path.resolve(__dirname, 'email-policy.html')
+      }
+    }
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
