@@ -6,7 +6,7 @@
     },
     {
       "source": "/email-policy",
-      "destination": "/email-policy.html"
+      "destination": "/email-policy/index.html"
     },
     {
       "source": "/data/:path*",
