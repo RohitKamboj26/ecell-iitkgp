@@ -14,6 +14,7 @@ import RMSOEE from "./pages/RMSOEE";
 import Contact from "./pages/Contact";
 import Certificate from "./pages/Certificate";
 import NotFound from "./pages/NotFound";
+import EmailPolicy from "./pages/EmailPolicy";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
                 <Route path="/rmsoee" element={<RMSOEE />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/certificate" element={<Certificate />} />
+                <Route path="/email-policy" element={<EmailPolicy />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </main>
