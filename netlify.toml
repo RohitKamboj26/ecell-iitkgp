@@ -5,7 +5,7 @@
 
 [[redirects]]
   from = "/email-policy"
-  to = "/email-policy/index.html"
+  to = "/email-policy.html"
   status = 200
 
 [[redirects]]
